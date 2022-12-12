@@ -1,6 +1,7 @@
+from MancalaBoard import MancalaBoard
 class Game:
-    def __init__(self, mancalaBoard, player):
-        self.state = mancalaBoard #représenter l’état (c’est-à-dire une instance de la classe MancalaBoard)
+    def __init__(self, player):
+        self.state = MancalaBoard() #représenter l’état (c’est-à-dire une instance de la classe MancalaBoard)
         self.playerSide = player #le numéro du joueur choisi par l’utilisateur (player1 ou player2)
 
     def gameOver(self):#va vérifier si la partie est finie
@@ -37,3 +38,8 @@ class Game:
 
     def evaluate(self):#va estimer le gain
         return (self.state.board[1] - self.state.board[2])            
+# Tests 
+test1=Game(1)
+print(test1.gameOver())
+print(test1.findWinner())
+print(test1.evaluate())
