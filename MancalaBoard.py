@@ -13,15 +13,19 @@ class MancalaBoard:
         # la fosse suivante  
         self.next={"A":"B", "B":"C", "C":"D", "D":"E", "E":"F", "F":1, 1:"L", "L":"K", "K":"J", "J":"I", "I":"H", "H":"G","G":2, 2:"A"}    
 
-    def possibleMoves(self,Board):
+    def possibleMoves(self,player):
         # cette fonction va retourner les indices des fosses du joueur qui contiennent des graines:    
         PossibleMoves=[]
-        for cle, valeur in Board.items():
-            if(valeur !=0 and cle !=1 and cle !=2):
-                PossibleMoves.append(cle)
-                #print("l"élément de clé", cle, "vaut", valeur)
+        if(player==1):
+            for fosse in self.fosses1:
+                if(self.board[fosse]!=0):
+                    PossibleMoves.append(fosse)          
+        else:
+            for fosse in self.fosses2:
+                if(self.board[fosse]!=0):
+                    PossibleMoves.append(fosse)    
+        return PossibleMoves  
 
-        return PossibleMoves    
     def doMove(self, player, position):
         # cette fonction va exécuter un mouvement, et retourner le numéro du joueur qui va jouer le prochain tour:
 
@@ -64,5 +68,4 @@ class MancalaBoard:
 test= MancalaBoard()
 #print(test.doMove(1,"F"))
 #print(test.board)
-#B={"A":0, "B":1, "C":4, "D":3, "E":4, "F":0,"G":4, "H":4, "I":4, "J":4, "K":4, "L":4,1:0, 2:0}
-#print(test.possibleMoves(B))
+print(test.possibleMoves(2))

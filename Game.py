@@ -34,7 +34,7 @@ class Game:
         if (self.state.board[1] > self.state.board[2]):
             return 1, self.state.board[1]
         else: 
-            return 2, self.state.board[2]  
+            return 2, self.state.board[2] 
 
     def evaluate(self):#va estimer le gain
         return (self.state.board[1] - self.state.board[2])            
