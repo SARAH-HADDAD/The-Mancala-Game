@@ -28,6 +28,9 @@ class MancalaBoard:
 
     def doMove(self, player, position):
         # cette fonction va exécuter un mouvement, et retourner le numéro du joueur qui va jouer le prochain tour:
+        if(position==None):
+            print("gameover")
+            return -1
 
         #choisit une fosse de son côté du plateau et ramasse toutes ses graines
         graines=self.board[position]
@@ -44,7 +47,11 @@ class MancalaBoard:
         #Si la dernière graine déposée atterrit dans une fosse vide du côté du joueur, cette graine
         #et toutes les graines dans la fosse du côté opposé (c’est-à-dire une fosse de l’adversaire)
         #vont à ce joueur, et sont placées dans son magasin
-        if(self.board[position]==1 and position!=1 and position!=2 ):
+        if(player==1):
+            player_fosses=self.fosses1
+        else:
+            player_fosses=self.fosses2
+        if(self.board[position]==1 and position in player_fosses ):
             self.board[position]=0
             oppositePosition=self.opposite[position]
             self.board[player]+=(self.board[oppositePosition]+1)          

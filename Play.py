@@ -6,15 +6,26 @@ class Play:
     #def __init__(self):
 
 
-    #def humanTurn(self):#va permettre à l’utilisateur de jouer son tour 
+    def humanTurn(self,game):#va permettre à l’utilisateur de jouer son tour 
+        print(game.state.possibleMoves(1))
+        move = input("Selectionez parmis les choix :")
+        curent_player = game.state.doMove(1, move)
+        return curent_player
+    def computerTurn(self,game,play,depth = 8 ):
+        if len(game.state.possibleMoves(2)) > 0:
+            #(game,1,4,-math.inf,math.inf))
+            best_node = play.negaMaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
+            print('computer:',best_node[1])
+            curent_player = game.state.doMove(2, best_node[1])
 
+        return curent_player, game
 
     #def computerTurn(self):#va permettre à l’ordinateur de jouer son tour
     def negaMaxAlphaBetaPruning(self, game, player, depth, alpha, beta):
         # game is an instance of the Game class and player = COMPUTER (Max) or HUMAN (Min)
         if game.gameOver() or depth == 0:
             bestValue = game.evaluate()
-            if player == 1:
+            if player == 1:#human
                 bestValue = -bestValue
             return bestValue, None
 
@@ -37,12 +48,24 @@ class Play:
             alpha = max(alpha, bestValue)
             if beta <= alpha:
                 break
-        print(bestValue)
-        print(bestPit)
+        #print(bestValue)
+        #print(bestPit)
         return bestValue, bestPit
     
 #Tests
 print("game class")
 test=Play()
 game=Game(1)
-print(test.negaMaxAlphaBetaPruning(game,1,4,-math.inf,math.inf))
+player=1
+while(game.gameOver):
+    if(player==1):
+        print()
+        player=test.humanTurn(game)
+        print()
+    else:
+        print()
+        player,game=test.computerTurn(game,test)
+        print()
+    print(game.state.board)
+
+#print(test.negaMaxAlphaBetaPruning(game,1,4,-math.inf,math.inf))
