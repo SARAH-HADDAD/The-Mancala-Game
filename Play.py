@@ -21,7 +21,7 @@ class Play:
         bestValue = -float("inf")
         bestPit = None
 
-        for pit in game.state.possibleMoves(str(player)):
+        for pit in game.state.possibleMoves(player):
             childGame = copy.deepcopy(game)
             childGame.state.doMove(player, pit)
             value, _ = self.negaMaxAlphaBetaPruning(childGame, -player, depth-1, -beta, -alpha)
