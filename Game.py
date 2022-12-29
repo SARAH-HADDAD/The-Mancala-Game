@@ -17,18 +17,21 @@ class Game:
                 gameOver2 = False
                 break
         #Lorsque le joueur 1 n’a plus de graines dans toutes ses fosses, la partie se termine
-        #le joueur 2peut prendre toutes les graines restantes et les placer dans son  magasin      
+        #le joueur 2peut prendre toutes les graines restantes et les placer dans son  magasin  
+        if(gameOver1==False or gameOver2==False):
+            return False    
         if(gameOver1):
+            print("GG sarah")
             for fosse in self.state.fosses2:
                 self.state.board[2]+=self.state.board[fosse]
                 self.state.board[fosse]=0
             return True
         if(gameOver2):
+            print("GG computer")
             for fosse in self.state.fosses1:
                 self.state.board[1]+=self.state.board[fosse]
                 self.state.board[fosse]=0
             return True    
-        return  False   
 
     def findWinner(self):#va retourner le gagnant de la partie, ainsi que son score
         if (self.state.board[1] > self.state.board[2]):
@@ -39,8 +42,8 @@ class Game:
     def evaluate(self):#va estimer le gain
         return (self.state.board[1] - self.state.board[2])            
 # Tests 
-print("game class")
-test1=Game(1)
-print(test1.gameOver())
-print(test1.findWinner())
-print(test1.evaluate())
+#print("game class")
+#test1=Game(1)
+#print(test1.gameOver())
+#print(test1.findWinner())
+#print(test1.evaluate())

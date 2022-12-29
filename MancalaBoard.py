@@ -63,8 +63,9 @@ class MancalaBoard:
             return 1    
 
 # Tests 
-print("MancalaBoard class")
-test= MancalaBoard()
-print(test.doMove(1,"F"))
-print(test.board)
-print(test.possibleMoves(2))
+
+#print("MancalaBoard class")
+#test= MancalaBoard()
+#print(test.doMove(1,"F"))
+#print(test.board)
+#print(test.possibleMoves(2))
