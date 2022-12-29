@@ -24,7 +24,10 @@ class Play:
         for pit in game.state.possibleMoves(player):
             childGame = copy.deepcopy(game)
             childGame.state.doMove(player, pit)
-            value, _ = self.negaMaxAlphaBetaPruning(childGame, -player, depth-1, -beta, -alpha)
+            if(player==1):
+                player=2
+            else: player=1
+            value, _ = self.negaMaxAlphaBetaPruning(childGame, player, depth-1, -beta, -alpha)
             value = -value
 
             if value > bestValue:
@@ -34,7 +37,8 @@ class Play:
             alpha = max(alpha, bestValue)
             if beta <= alpha:
                 break
-
+        print(bestValue)
+        print(bestPit)
         return bestValue, bestPit
     
 #Tests

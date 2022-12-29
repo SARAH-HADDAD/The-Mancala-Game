@@ -44,7 +44,7 @@ class MancalaBoard:
         #Si la dernière graine déposée atterrit dans une fosse vide du côté du joueur, cette graine
         #et toutes les graines dans la fosse du côté opposé (c’est-à-dire une fosse de l’adversaire)
         #vont à ce joueur, et sont placées dans son magasin
-        if(self.board[position]==1):
+        if(self.board[position]==1 and position!=1 and position!=2 ):
             self.board[position]=0
             oppositePosition=self.opposite[position]
             self.board[player]+=(self.board[oppositePosition]+1)          
