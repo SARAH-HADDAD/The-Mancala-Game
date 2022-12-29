@@ -67,5 +67,6 @@ while(game.gameOver):
         player,game=test.computerTurn(game,test)
         print()
     print(game.state.board)
-print(game.state.board)
+print(game.findWinner())
+
 #print(test.negaMaxAlphaBetaPruning(game,1,4,-math.inf,math.inf))
