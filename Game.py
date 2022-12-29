@@ -39,6 +39,7 @@ class Game:
     def evaluate(self):#va estimer le gain
         return (self.state.board[1] - self.state.board[2])            
 # Tests 
+print("game class")
 test1=Game(1)
 print(test1.gameOver())
 print(test1.findWinner())

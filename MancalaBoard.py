@@ -46,26 +46,18 @@ class MancalaBoard:
         #vont à ce joueur, et sont placées dans son magasin
         if(self.board[position]==1):
             self.board[position]=0
-            if(player==1):
-                player_fosses=self.fosses1
-                opposite=self.fosses2
-            else:
-                player_fosses=self.fosses2
-                opposite=self.fosses1
-            oppositePosition=-1    
-            for i in range(len(player_fosses)): 
-                if(position==player_fosses[i]):
-                    oppositePosition=opposite[i] 
-            if(oppositePosition!=-1):        
-                self.board[player]+=self.board[oppositePosition]          
-                self.board[oppositePosition] = 0
+            oppositePosition=self.opposite[position]
+            self.board[player]+=(self.board[oppositePosition]+1)          
+            self.board[oppositePosition] = 0
+
         if(player==1):
             return 2
         else:
             return 1    
 
 # Tests 
+print("MancalaBoard class")
 test= MancalaBoard()
-#print(test.doMove(1,"F"))
-#print(test.board)
+print(test.doMove(1,"F"))
+print(test.board)
 print(test.possibleMoves(2))
