@@ -18,7 +18,6 @@ while(not game.gameOver()):
     else:
         player,game=test.computerTurn(game,test)
         draw.Update(game.state.board,player)
-    time.sleep(2)
     # Handle events
     for event in pygame.event.get():
         # Quit the game if the user closes the window

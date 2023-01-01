@@ -1,6 +1,7 @@
 import pygame
 import random
 from MancalaBoard import MancalaBoard
+import time
 # Initialize Pygame
 pygame.init()
 # create a font object.
@@ -113,7 +114,7 @@ class Drawer:
         y=y+add
         # create a text surface object,
         # # on which text is drawn on it.
-        text = font.render(f"{value} ", True, WHITE, DARK_GRAY)
+        text = font.render(f" {value} ", True, WHITE, DARK_GRAY)
         # create a rectangular object for the
         # # text surface object
         textRect = text.get_rect()
@@ -143,9 +144,9 @@ class Drawer:
     def DisplayTurn(self,Player):
         font = pygame.font.Font('Arial.ttf', 25)
         if(Player==2):
-            text = font.render(f"It's AI turn! ", True, (220,20,60), DARK_GRAY)
+            text = font.render(f"* It's AI turn! *", True, (220,20,60), DARK_GRAY)
         else:
-            text = font.render(f"It's your turn!", True, (220,20,60), DARK_GRAY)
+            text = font.render(f" It's your turn! ", True, (220,20,60), DARK_GRAY)
         textRect = text.get_rect()
         textRect.center = WIDTH/2,100
         self.screen.blit(text,textRect)
@@ -160,6 +161,7 @@ class Drawer:
             self.PitValue(cor,board[cle],add)
             for i in range(board[cle]):
                 self.drawSeed(cor)
+        time.sleep(2)
         self.PlayerScore(player,board[player])
         self.DisplayTurn(player)
 
