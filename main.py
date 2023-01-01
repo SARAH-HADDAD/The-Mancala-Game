@@ -1,7 +1,7 @@
 
 import pygame
 from GUI import Drawer
-draw=Drawer()
+draw = Drawer()
 # Run the game loop
 running = True
 while running:
