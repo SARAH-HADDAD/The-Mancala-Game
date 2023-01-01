@@ -50,6 +50,36 @@ class Play:
         #print(bestValue)
         #print(bestPit)
         return bestValue, bestPit
+    def minimaxAlphaBetaPruning(self, game, player, depth, alpha, beta):
+        # game is an instance of the Game class and player = COMPUTER (Max) or HUMAN (Min)
+        if game.gameOver() or depth == 0:
+            bestValue = game.evaluate()
+            return bestValue, None
+
+        bestValue = float("inf") if player == 1 else -float("inf")
+        bestPit = None
+
+        for pit in game.state.possibleMoves(player):
+            childGame = copy.deepcopy(game)
+            childGame.state.doMove(player, pit)
+            value, _ = self.minimaxAlphaBetaPruning(childGame, 2 if player == 1 else 1, depth-1, alpha, beta)
+
+            if player == 1:
+                if value < bestValue:
+                    bestValue = value
+                    bestPit = pit
+                beta = min(beta, bestValue)
+            else:
+                if value > bestValue:
+                    bestValue = value
+                    bestPit = pit
+                alpha = max(alpha, bestValue)
+
+            if beta <= alpha:
+                break
+        return bestValue, bestPit
+   
+
     
 #Tests
 """
