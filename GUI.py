@@ -3,7 +3,8 @@ import random
 from MancalaBoard import MancalaBoard
 # Initialize Pygame
 pygame.init()
-
+# create a font object.
+font = pygame.font.Font('Arial.ttf', 30)
 # Set the window size
 WIDTH, HEIGHT = (1300, 700)
 # rgb
@@ -54,6 +55,9 @@ class Drawer:
             self.drawSeed(valeur)
             self.drawSeed(valeur)
             self.drawSeed(valeur)
+            if(cle in ["A", "B", "C", "D", "E", "F"]):
+                self.PitValue(valeur,4,-100)
+            else:self.PitValue(valeur,4,100)
 
 
     def drawBoard(self):
@@ -92,8 +96,8 @@ class Drawer:
         print(self.board)
         pygame.display.flip()
 
-    def drawSeed(self,valeur):
-        x,y=valeur
+    def drawSeed(self,cor):
+        x,y=cor
         x=x+random.randint(-30, 30)
         y=y+random.randint(-30, 30)
         pygame.draw.circle(self.screen, random.choice(seed_color),
@@ -101,7 +105,19 @@ class Drawer:
         pygame.draw.circle(self.screen, BLACK,
                                (x,y), seed_width,1)
         pygame.display.flip()
-
+    def PitValue(self,cor,value,add):
+        x,y=cor
+        y=y+add
+        # create a text surface object,
+        # # on which text is drawn on it.
+        text = font.render(f"{value}", True, WHITE, DARK_GRAY)
+        # create a rectangular object for the
+        # # text surface object
+        textRect = text.get_rect()
+        # set the center of the rectangular object.
+        textRect.center = x,y
+        self.screen.blit(text,textRect)
+        pygame.display.flip()
 
     def updateFosses(self, lettre):
         pygame.draw.circle(self.screen, fosse_color,
