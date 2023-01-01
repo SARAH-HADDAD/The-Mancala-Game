@@ -2,19 +2,21 @@ from Game import Game
 from MancalaBoard import MancalaBoard
 import math
 import copy
+import random 
 class Play:
     #def __init__(self):
 
 
     def humanTurn(self,game):#va permettre à l’utilisateur de jouer son tour 
         print(game.state.possibleMoves(1))
-        move = input("Selectionez parmis les choix :")
+        #move = input("Selectionez parmis les choix :")
+        move =random.choice(game.state.possibleMoves(1))
         curent_player = game.state.doMove(1, move)
         return curent_player
     def computerTurn(self,game,play,depth = 6 ):
         if len(game.state.possibleMoves(2)) > 0:
             #(game,1,4,-math.inf,math.inf))
-            best_node = play.negaMaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
+            best_node = play.minimaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
             print('computer:',best_node[1])
             curent_player = game.state.doMove(2, best_node[1])
         return curent_player, game

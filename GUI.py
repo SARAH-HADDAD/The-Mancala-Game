@@ -58,6 +58,9 @@ class Drawer:
             if(cle in ["A", "B", "C", "D", "E", "F"]):
                 self.PitValue(valeur,4,-100)
             else:self.PitValue(valeur,4,100)
+        self.PlayerScore(1,0)
+        self.PlayerScore(2,0)
+        self.DisplayTurn(1)
 
 
     def drawBoard(self):
@@ -110,7 +113,7 @@ class Drawer:
         y=y+add
         # create a text surface object,
         # # on which text is drawn on it.
-        text = font.render(f"{value}", True, WHITE, DARK_GRAY)
+        text = font.render(f"{value} ", True, WHITE, DARK_GRAY)
         # create a rectangular object for the
         # # text surface object
         textRect = text.get_rect()
@@ -123,3 +126,44 @@ class Drawer:
         pygame.draw.circle(self.screen, fosse_color,
                            self.board[lettre], fosse_width)
         pygame.display.flip()
+
+    def PlayerScore(self,Player,value):
+        if(Player==1):
+            text = font.render(f"You : {value}", True, WHITE, DARK_GRAY)
+            textRect = text.get_rect()
+            textRect.center = WIDTH-200,100
+
+        else:
+            text = font.render(f"AI : {value}", True, WHITE, DARK_GRAY)
+            textRect = text.get_rect()
+            textRect.center = 200,100
+        self.screen.blit(text,textRect)
+        pygame.display.flip()
+
+    def DisplayTurn(self,Player):
+        font = pygame.font.Font('Arial.ttf', 25)
+        if(Player==2):
+            text = font.render(f"It's AI turn! ", True, (220,20,60), DARK_GRAY)
+        else:
+            text = font.render(f"It's your turn!", True, (220,20,60), DARK_GRAY)
+        textRect = text.get_rect()
+        textRect.center = WIDTH/2,100
+        self.screen.blit(text,textRect)
+        pygame.display.flip()
+
+    def Update(self,board,player):
+        self.drawFosses()
+        
+        for cle, cor in self.board.items():
+            if(cle in ["A", "B", "C", "D", "E", "F"]):add=-100
+            else:add=100
+            self.PitValue(cor,board[cle],add)
+            for i in range(board[cle]):
+                self.drawSeed(cor)
+        self.PlayerScore(player,board[player])
+        self.DisplayTurn(player)
+
+
+        
+
+
