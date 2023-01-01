@@ -11,13 +11,12 @@ class Play:
         move = input("Selectionez parmis les choix :")
         curent_player = game.state.doMove(1, move)
         return curent_player
-    def computerTurn(self,game,play,depth = 8 ):
+    def computerTurn(self,game,play,depth = 6 ):
         if len(game.state.possibleMoves(2)) > 0:
             #(game,1,4,-math.inf,math.inf))
             best_node = play.negaMaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
             print('computer:',best_node[1])
             curent_player = game.state.doMove(2, best_node[1])
-
         return curent_player, game
 
     #def computerTurn(self):#va permettre à l’ordinateur de jouer son tour
@@ -53,11 +52,12 @@ class Play:
         return bestValue, bestPit
     
 #Tests
+"""
 print("game class")
 test=Play()
 game=Game(1)
 player=1
-while(game.gameOver):
+while(not game.gameOver()):
     if(player==1):
         print()
         player=test.humanTurn(game)
@@ -68,5 +68,5 @@ while(game.gameOver):
         print()
     print(game.state.board)
 print(game.findWinner())
-
+"""
 #print(test.negaMaxAlphaBetaPruning(game,1,4,-math.inf,math.inf))

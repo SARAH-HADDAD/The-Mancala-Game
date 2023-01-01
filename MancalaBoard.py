@@ -28,10 +28,6 @@ class MancalaBoard:
 
     def doMove(self, player, position):
         # cette fonction va exécuter un mouvement, et retourner le numéro du joueur qui va jouer le prochain tour:
-        if(position==None):
-            print("gameover")
-            return -1
-
         #choisit une fosse de son côté du plateau et ramasse toutes ses graines
         graines=self.board[position]
         self.board[position]=0
