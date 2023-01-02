@@ -23,5 +23,7 @@ while(not game.gameOver()):
         # Quit the game if the user closes the window
         if event.type == pygame.QUIT:
             running = False
-print(game.findWinner())
+player,score=game.findWinner()
+draw.DisplayTheWinner(player,score)
+time.sleep(10)
 pygame.quit()

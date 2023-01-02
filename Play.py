@@ -13,10 +13,10 @@ class Play:
         move =random.choice(game.state.possibleMoves(1))
         curent_player = game.state.doMove(1, move)
         return curent_player
-    def computerTurn(self,game,play,depth = 6 ):
+    def computerTurn(self,game,play,depth = 10 ):
         if len(game.state.possibleMoves(2)) > 0:
             #(game,1,4,-math.inf,math.inf))
-            best_node = play.minimaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
+            best_node = play.negaMaxAlphaBetaPruning(game,2, depth,-math.inf,math.inf)
             print('computer:',best_node[1])
             curent_player = game.state.doMove(2, best_node[1])
         return curent_player, game

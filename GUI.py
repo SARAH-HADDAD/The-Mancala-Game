@@ -62,6 +62,9 @@ class Drawer:
         self.PlayerScore(1,0)
         self.PlayerScore(2,0)
         self.DisplayTurn(1)
+        self.Store1=0
+        self.Store2=0
+        time.sleep(3)
 
 
     def drawBoard(self):
@@ -97,7 +100,7 @@ class Drawer:
             pygame.draw.circle(self.screen, fosse_color,
                                (fosse_x, fosse_y), fosse_width)
             self.board[f2[i]] = (fosse_x, fosse_y)
-        print(self.board)
+        #print(self.board)
         pygame.display.flip()
     def drawFosseP1(self,i):
         fosse_y = HEIGHT-200
@@ -113,7 +116,7 @@ class Drawer:
         pygame.draw.circle(self.screen, fosse_color,
                                (fosse_x, fosse_y), fosse_width)
         pygame.display.flip()
-        print(self.board)
+        #print(self.board)
         pygame.display.flip()        
     def drawSeed(self,cor):
         x,y=cor
@@ -167,6 +170,24 @@ class Drawer:
         self.screen.blit(text,textRect)
         pygame.display.flip()
 
+    def drawSeedStore(self,value,player):
+        if(player==2):
+            x,y=store1_x,store1_y
+            n=value-self.Store1
+            self.Store1=value
+        else:
+            x,y=store2_x,store2_y
+            n=value-self.Store2
+            self.Store2=value
+        x=x+random.randint(21, store_width-21)
+        y=y+random.randint(21, store_height-21)
+        for i in range(n):
+            pygame.draw.circle(self.screen, random.choice(seed_color),
+                               (x,y), seed_width)
+            pygame.draw.circle(self.screen, BLACK,
+                               (x,y), seed_width,1)
+        pygame.display.flip()
+        
     def Update(self,board,player):
         #self.drawFosses()
         for cle, cor in self.board.items():
@@ -182,10 +203,30 @@ class Drawer:
             self.PitValue(cor,board[cle],add)
             for i in range(board[cle]):
                 self.drawSeed(cor)
-            time.sleep(0.2)
-        time.sleep(0.2)
+            #time.sleep(0.3)
+        #time.sleep(0.2)
         self.PlayerScore(player,board[player])
+        self.drawSeedStore(board[player],player)
+        #time.sleep(0.2)
         self.DisplayTurn(player)
+    def DisplayTheWinner(self,player,score):
+        self.drawBoard()
+        font = pygame.font.Font('Arial.ttf', 40)
+        if(player==1):
+            text = font.render(f"The Winner is : You ", True, WHITE, DARK_GRAY)     
+        else:
+            text = font.render(f"The Winner is : AI ", True, WHITE, DARK_GRAY)
+
+        text2 = font.render(f"Score:{score}", True, WHITE, DARK_GRAY)
+        textRect = text.get_rect()
+        textRect.center = WIDTH/2,(HEIGHT/2-60)
+        self.screen.blit(text,textRect)
+        textRect = text2.get_rect()
+        textRect.center = WIDTH/2,(HEIGHT/2+60)
+        self.screen.blit(text2,textRect)
+        pygame.display.flip()
+
+        
 
 
         
