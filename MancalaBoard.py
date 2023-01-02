@@ -59,11 +59,3 @@ class MancalaBoard:
             return 2
         else:
             return 1
-
-# Tests
-
-#print("MancalaBoard class")
-#test= MancalaBoard()
-# print(test.doMove(1,"F"))
-# print(test.board)
-# print(test.possibleMoves(2))
