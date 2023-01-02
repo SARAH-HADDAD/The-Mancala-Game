@@ -187,8 +187,8 @@ class Drawer:
             x, y = store2_x, store2_y
             n = value-self.Store2
             self.Store2 = value
-        x = x+random.randint(21, store_width-21)
-        y = y+random.randint(21, store_height-21)
+        x = x+random.randint(22, store_width-22)
+        y = y+random.randint(22, store_height-22)
         for i in range(n):
             pygame.draw.circle(self.screen, random.choice(seed_color),
                                (x, y), seed_width)
@@ -211,11 +211,9 @@ class Drawer:
             self.PitValue(cor, board[cle], add)
             for i in range(board[cle]):
                 self.drawSeed(cor)
-            time.sleep(0.3)
-        time.sleep(0.2)
         self.PlayerScore(player, board[player])
         self.drawSeedStore(board[player], player)
-        time.sleep(0.2)
+        time.sleep(0.5)
         self.DisplayTurn(player)
 
     def DisplayTheWinner(self, player, score):
