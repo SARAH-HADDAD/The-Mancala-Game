@@ -69,7 +69,7 @@ class Drawer:
         self.Store2 = 0
         self.change={"A": 4, "B": 4, "C": 4, "D": 4, "E": 4, "F": 4,
                       "G": 4, "H": 4, "I": 4, "J": 4, "K": 4, "L": 4}
-
+        print(self.board)
         pygame.display.flip()
 
     def drawBoard(self):

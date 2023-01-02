@@ -5,30 +5,53 @@ import copy
 import random
 from copy import deepcopy
 import pygame
-
+def getFosseFromPos(pos):
+    # Convert the mouse position to a fosse index (A, B, C, etc.)
+    fosse_index = None
+    # Check if the mouse position is within the bounds of a fosse
+    if (335 -55 <= pos[0] <= 335+55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "A"
+    elif (460 -55 <= pos[0] <= 460 +55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "B"
+    elif (585 -55 <= pos[0] <= 585 +55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "C"
+    elif (710 -55 <= pos[0] <= 710 +55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "D"
+    elif (835 -55 <= pos[0] <= 835 +55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "E"
+    elif (960 -55 <= pos[0] <= 960 +55) and (500-55 <= pos[1] <= 500+55):
+        fosse_index = "F"
+    return fosse_index
 class Play:
     # def __init__(self):
 
     def humanTurn(self, game):
-    # Listen for user input
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONUP:
-                # Get the position of the mouse click
-                pos = pygame.mouse.get_pos()
-                # Convert the mouse position to a fosse index (A, B, C, etc.)
-                fosse = self.getFosseFromPos(pos)
-                # If the fosse is a valid move, make the move and return the current player
-                if fosse in game.state.possibleMoves(1):
-                    curent_player = game.state.doMove(1, fosse)
-                    return curent_player
-        # If no valid move was made, return the same player
-        return 1
-
+        # Initialize a flag to track whether a valid move has been made
+        move_made = False
+        # Run the loop until a valid move is made
+        while not move_made:
+            # Listen for user input
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    # Get the position of the mouse click
+                    pos = pygame.mouse.get_pos()
+                    # Convert the mouse position to a fosse index (A, B, C, etc.)
+                    fosse = getFosseFromPos(pos)
+                    # If the fosse is a valid move, make the move and set the flag to True
+                    if fosse in game.state.possibleMoves(1):
+                        curent_player = game.state.doMove(1, fosse)
+                        move_made = True
+                        break
+            # Pause the game loop for a short time to allow the computer to process events
+            pygame.time.delay(50)
+        # Return the current player
+        return curent_player
 
     def computerTurn(self, game, play, depth=8):
         if len(game.state.possibleMoves(2)) > 0:
-            best_node = play.negamaxAlphaBetaPruning(
+            best_node = play.minmaxAlphaBetaPruning(
                 game, 2, depth, -math.inf, math.inf)
+            print('computer:', best_node[1])
             curent_player = game.state.doMove(2, best_node[1])
         return curent_player, game
 
