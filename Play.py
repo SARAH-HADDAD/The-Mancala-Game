@@ -5,23 +5,27 @@ import copy
 import random
 from copy import deepcopy
 import pygame
+
+
 def getFosseFromPos(pos):
     # Convert the mouse position to a fosse index (A, B, C, etc.)
     fosse_index = None
     # Check if the mouse position is within the bounds of a fosse
-    if (335 -55 <= pos[0] <= 335+55) and (500-55 <= pos[1] <= 500+55):
+    if (335 - 55 <= pos[0] <= 335+55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "A"
-    elif (460 -55 <= pos[0] <= 460 +55) and (500-55 <= pos[1] <= 500+55):
+    elif (460 - 55 <= pos[0] <= 460 + 55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "B"
-    elif (585 -55 <= pos[0] <= 585 +55) and (500-55 <= pos[1] <= 500+55):
+    elif (585 - 55 <= pos[0] <= 585 + 55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "C"
-    elif (710 -55 <= pos[0] <= 710 +55) and (500-55 <= pos[1] <= 500+55):
+    elif (710 - 55 <= pos[0] <= 710 + 55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "D"
-    elif (835 -55 <= pos[0] <= 835 +55) and (500-55 <= pos[1] <= 500+55):
+    elif (835 - 55 <= pos[0] <= 835 + 55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "E"
-    elif (960 -55 <= pos[0] <= 960 +55) and (500-55 <= pos[1] <= 500+55):
+    elif (960 - 55 <= pos[0] <= 960 + 55) and (500-55 <= pos[1] <= 500+55):
         fosse_index = "F"
     return fosse_index
+
+
 class Play:
     # def __init__(self):
 
@@ -51,7 +55,7 @@ class Play:
         if len(game.state.possibleMoves(2)) > 0:
             best_node = play.minmaxAlphaBetaPruning(
                 game, 2, depth, -math.inf, math.inf)
-            print('computer:', best_node[1])
+
             curent_player = game.state.doMove(2, best_node[1])
         return curent_player, game
 
@@ -66,9 +70,11 @@ class Play:
             new_game = deepcopy(game)
             current_player = new_game.state.doMove(player, move)
             if current_player == player:  # player gets an extra turn
-                value, _ = self.negamaxAlphaBetaPruning(new_game, player, depth, alpha, beta)
+                value, _ = self.negamaxAlphaBetaPruning(
+                    new_game, player, depth, alpha, beta)
             else:
-                value, _ = self.negamaxAlphaBetaPruning(new_game, 3 - player, depth - 1, -beta, -alpha)
+                value, _ = self.negamaxAlphaBetaPruning(
+                    new_game, 3 - player, depth - 1, -beta, -alpha)
             value = -value
             if value > best_value:
                 best_value = value
@@ -77,7 +83,6 @@ class Play:
             if alpha >= beta:
                 break
         return best_value, best_move
-
 
     def minmaxAlphaBetaPruning(self, game, player, depth, alpha, beta):
         if depth == 0 or game.gameOver():
@@ -89,7 +94,8 @@ class Play:
             for move in game.state.possibleMoves(player):
                 new_game = deepcopy(game)
                 new_game.state.doMove(player, move)
-                value, _ = self.minmaxAlphaBetaPruning(new_game, 2, depth - 1, alpha, beta)
+                value, _ = self.minmaxAlphaBetaPruning(
+                    new_game, 2, depth - 1, alpha, beta)
                 if value > best_value:
                     best_value = value
                     best_move = move
@@ -103,7 +109,8 @@ class Play:
             for move in game.state.possibleMoves(player):
                 new_game = deepcopy(game)
                 new_game.state.doMove(player, move)
-                value, _ = self.minmaxAlphaBetaPruning(new_game, 1, depth - 1, alpha, beta)
+                value, _ = self.minmaxAlphaBetaPruning(
+                    new_game, 1, depth - 1, alpha, beta)
                 if value < best_value:
                     best_value = value
                     best_move = move
@@ -111,4 +118,3 @@ class Play:
                 if alpha >= beta:
                     break
             return best_value, best_move
-
