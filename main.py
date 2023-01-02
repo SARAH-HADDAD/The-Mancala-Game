@@ -13,12 +13,13 @@ player = 1
 while (not game.gameOver()):
     if (player == 1):
         draw.DisplayPossibleMoves(game.state.possibleMoves(1))
-        # time.sleep(5)
+        time.sleep(5)
         player = test.humanTurn(game)
-        draw.Update(game.state.board, player)
+        draw.RemovePossibleMoves(game.state.possibleMoves(1))
+        draw.Update1(game.state.board)
     else:
         player, game = test.computerTurn(game, test)
-        draw.Update(game.state.board, player)
+        draw.Update2(game.state.board)
     # Handle events
     for event in pygame.event.get():
         # Quit the game if the user closes the window

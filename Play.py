@@ -6,7 +6,6 @@ import random
 from copy import deepcopy
 
 
-
 class Play:
     # def __init__(self):
 
@@ -19,7 +18,6 @@ class Play:
         if len(game.state.possibleMoves(2)) > 0:
             best_node = play.minmaxAlphaBetaPruning(
                 game, 2, depth, -math.inf, math.inf)
-            print('computer:', best_node[1])
             curent_player = game.state.doMove(2, best_node[1])
         return curent_player, game
 

@@ -67,6 +67,9 @@ class Drawer:
         self.DisplayTurn(1)
         self.Store1 = 0
         self.Store2 = 0
+        self.change={"A": 4, "B": 4, "C": 4, "D": 4, "E": 4, "F": 4,
+                      "G": 4, "H": 4, "I": 4, "J": 4, "K": 4, "L": 4}
+
         pygame.display.flip()
 
     def drawBoard(self):
@@ -196,26 +199,63 @@ class Drawer:
                                (x, y), seed_width, 1)
         pygame.display.flip()
 
-    def Update(self, board, player):
+    def Update1(self, board, player=1):
         # self.drawFosses()
-        for cle, cor in self.board.items():
-            if (cle in ["A", "B", "C", "D", "E", "F"]):
+        liste = ["A", "B", "C", "D", "E", "F"]
+        for i in liste:
+            if(self.change[i]!=board[i]):
                 add = -100
-                liste = ["A", "B", "C", "D", "E", "F"]
-                self.drawFosseP1(liste.index(cle))
-            else:
+                self.drawFosseP1(liste.index(i))
+                #print(self.board[i])
+                for j in range(board[i]):
+                    self.drawSeed(self.board[i])
+                self.PitValue(self.board[i], board[i], add)
+                time.sleep(0.8)
+            self.change[i]=board[i]
+        self.PlayerScore(player, board[player])
+        self.drawSeedStore(board[player], player)  
+        time.sleep(0.5)         
+        liste=["L","K","J","I","H","G"]
+        l=["G", "H", "I", "J", "K", "L"]
+        for i in liste :
+            if(self.change[i]!=board[i]):
                 add = 100
-                liste = ["G", "H", "I", "J", "K", "L"]
-                self.drawFosseP2(liste.index(cle))
+                self.drawFosseP2(l.index(i))
+                for j in range(board[i]):
+                    self.drawSeed(self.board[i])
+                self.PitValue(self.board[i], board[i], add)
+                time.sleep(0.8)
+            self.change[i]=board[i]
+        self.DisplayTurn(2)
+        time.sleep(0.5)
 
-            self.PitValue(cor, board[cle], add)
-            for i in range(board[cle]):
-                self.drawSeed(cor)
+    def Update2(self, board, player=2):
+        liste=["L","K","J","I","H","G"]
+        l=["G", "H", "I", "J", "K", "L"]
+        for i in liste :
+            if(self.change[i]!=board[i]):
+                add = 100
+                self.drawFosseP2(l.index(i))
+                for j in range(board[i]):
+                    self.drawSeed(self.board[i])
+                self.PitValue(self.board[i], board[i], add)
+                time.sleep(0.8)
+            self.change[i]=board[i]
         self.PlayerScore(player, board[player])
         self.drawSeedStore(board[player], player)
         time.sleep(0.5)
-        self.DisplayTurn(player)
-
+        liste = ["A", "B", "C", "D", "E", "F"]
+        for i in liste:
+            if(self.change[i]!=board[i]):
+                add = -100
+                self.drawFosseP1(liste.index(i))
+                for j in range(board[i]):
+                    self.drawSeed(self.board[i])
+                self.PitValue(self.board[i], board[i], add)
+                time.sleep(0.8)
+            self.change[i]=board[i]
+        self.DisplayTurn(1)
+        time.sleep(0.5)
     def DisplayTheWinner(self, player, score):
         self.drawBoard()
         font = pygame.font.Font('Arial.ttf', 40)
@@ -244,3 +284,15 @@ class Drawer:
             pygame.draw.circle(self.screen, (220, 20, 60),
                                (fosse_x, fosse_y), fosse_width, 2)
         pygame.display.flip()
+    def RemovePossibleMoves(self,liste):
+        for i in liste:
+            # self.drawFosseP1(self.board[i])
+            # self.drawFosseP1(liste.index(cle))
+            l = ["A", "B", "C", "D", "E", "F"]
+            fosse_y = HEIGHT-200
+            fosse_x = 335 + (l.index(i) * (fosse_width + fosse_spacing))
+            #pygame.draw.rect(self.screen, fosse_color, (fosse_x, fosse_y, fosse_width, fosse_height),width=0, border_radius=20)
+            pygame.draw.circle(self.screen, LIGHT_GRAY,
+                               (fosse_x, fosse_y), fosse_width, 2)        
+        pygame.display.flip()
+
