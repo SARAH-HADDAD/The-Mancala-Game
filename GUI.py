@@ -64,7 +64,7 @@ class Drawer:
         self.DisplayTurn(1)
         self.Store1=0
         self.Store2=0
-        time.sleep(3)
+        pygame.display.flip()
 
 
     def drawBoard(self):

@@ -7,14 +7,13 @@ import time
 draw = Drawer()
 # Run the game loop
 running = True
-print("game class")
 test=Play()
 game=Game(1)
 player=1
 while(not game.gameOver()):
     if(player==1):
         draw.DisplayPossibleMoves(game.state.possibleMoves(1))
-        time.sleep(2)
+        #time.sleep(5)
         player=test.humanTurn(game)
         draw.Update(game.state.board,player)
     else:
