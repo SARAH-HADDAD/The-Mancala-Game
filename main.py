@@ -13,6 +13,8 @@ game=Game(1)
 player=1
 while(not game.gameOver()):
     if(player==1):
+        draw.DisplayPossibleMoves(game.state.possibleMoves(1))
+        time.sleep(2)
         player=test.humanTurn(game)
         draw.Update(game.state.board,player)
     else:

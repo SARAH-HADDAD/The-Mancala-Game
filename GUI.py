@@ -203,11 +203,11 @@ class Drawer:
             self.PitValue(cor,board[cle],add)
             for i in range(board[cle]):
                 self.drawSeed(cor)
-            #time.sleep(0.3)
-        #time.sleep(0.2)
+            time.sleep(0.3)
+        time.sleep(0.2)
         self.PlayerScore(player,board[player])
         self.drawSeedStore(board[player],player)
-        #time.sleep(0.2)
+        time.sleep(0.2)
         self.DisplayTurn(player)
     def DisplayTheWinner(self,player,score):
         self.drawBoard()
@@ -226,7 +226,18 @@ class Drawer:
         self.screen.blit(text2,textRect)
         pygame.display.flip()
 
-        
+    def DisplayPossibleMoves(self,liste):
+        for i in liste:
+            #self.drawFosseP1(self.board[i])
+            #self.drawFosseP1(liste.index(cle))
+            l=["A", "B", "C", "D", "E", "F"]
+            fosse_y = HEIGHT-200
+            fosse_x = 335 + (l.index(i) * (fosse_width + fosse_spacing))
+            #pygame.draw.rect(self.screen, fosse_color, (fosse_x, fosse_y, fosse_width, fosse_height),width=0, border_radius=20)
+            pygame.draw.circle(self.screen, (220,20,60),
+                               (fosse_x, fosse_y), fosse_width,2)
+        pygame.display.flip()
+
 
 
         

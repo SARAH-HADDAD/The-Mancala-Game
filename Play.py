@@ -8,7 +8,7 @@ class Play:
 
 
     def humanTurn(self,game):#va permettre à l’utilisateur de jouer son tour 
-        print(game.state.possibleMoves(1))
+        #print(game.state.possibleMoves(1))
         #move = input("Selectionez parmis les choix :")
         move =random.choice(game.state.possibleMoves(1))
         curent_player = game.state.doMove(1, move)
