@@ -7,24 +7,24 @@ import time
 draw = Drawer()
 # Run the game loop
 running = True
-test=Play()
-game=Game(1)
-player=1
-while(not game.gameOver()):
-    if(player==1):
+test = Play()
+game = Game(1)
+player = 1
+while (not game.gameOver()):
+    if (player == 1):
         draw.DisplayPossibleMoves(game.state.possibleMoves(1))
-        #time.sleep(5)
-        player=test.humanTurn(game)
-        draw.Update(game.state.board,player)
+        # time.sleep(5)
+        player = test.humanTurn(game)
+        draw.Update(game.state.board, player)
     else:
-        player,game=test.computerTurn(game,test)
-        draw.Update(game.state.board,player)
+        player, game = test.computerTurn(game, test)
+        draw.Update(game.state.board, player)
     # Handle events
     for event in pygame.event.get():
         # Quit the game if the user closes the window
         if event.type == pygame.QUIT:
             running = False
-player,score=game.findWinner()
-draw.DisplayTheWinner(player,score)
+player, score = game.findWinner()
+draw.DisplayTheWinner(player, score)
 time.sleep(10)
 pygame.quit()
