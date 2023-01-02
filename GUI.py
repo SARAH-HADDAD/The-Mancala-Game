@@ -99,11 +99,26 @@ class Drawer:
             self.board[f2[i]] = (fosse_x, fosse_y)
         print(self.board)
         pygame.display.flip()
-
+    def drawFosseP1(self,i):
+        fosse_y = HEIGHT-200
+        fosse_x = 335 + (i * (fosse_width + fosse_spacing))
+        #pygame.draw.rect(self.screen, fosse_color, (fosse_x, fosse_y, fosse_width, fosse_height),width=0, border_radius=20)
+        pygame.draw.circle(self.screen, fosse_color,
+                               (fosse_x, fosse_y), fosse_width)
+        pygame.display.flip()
+    def drawFosseP2(self,i):
+        fosse_y = 200
+        fosse_x = 335 + (i * (fosse_width + fosse_spacing))
+        #pygame.draw.rect(self.screen, fosse_color, (fosse_x, fosse_y, fosse_width, fosse_height),width=0, border_radius=20)
+        pygame.draw.circle(self.screen, fosse_color,
+                               (fosse_x, fosse_y), fosse_width)
+        pygame.display.flip()
+        print(self.board)
+        pygame.display.flip()        
     def drawSeed(self,cor):
         x,y=cor
-        x=x+random.randint(-30, 30)
-        y=y+random.randint(-30, 30)
+        x=x+random.randint(-29, 29)
+        y=y+random.randint(-29, 29)
         pygame.draw.circle(self.screen, random.choice(seed_color),
                                (x,y), seed_width)
         pygame.draw.circle(self.screen, BLACK,
@@ -153,15 +168,22 @@ class Drawer:
         pygame.display.flip()
 
     def Update(self,board,player):
-        self.drawFosses()
-        
+        #self.drawFosses()
         for cle, cor in self.board.items():
-            if(cle in ["A", "B", "C", "D", "E", "F"]):add=-100
-            else:add=100
+            if(cle in ["A", "B", "C", "D", "E", "F"]):
+                add=-100
+                liste=["A", "B", "C", "D", "E", "F"]
+                self.drawFosseP1(liste.index(cle))
+            else:
+                add=100
+                liste=["G", "H", "I", "J", "K", "L"]
+                self.drawFosseP2(liste.index(cle))
+
             self.PitValue(cor,board[cle],add)
             for i in range(board[cle]):
                 self.drawSeed(cor)
-        time.sleep(2)
+            time.sleep(0.2)
+        time.sleep(0.2)
         self.PlayerScore(player,board[player])
         self.DisplayTurn(player)
 
