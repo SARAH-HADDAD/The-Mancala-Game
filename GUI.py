@@ -226,7 +226,6 @@ class Drawer:
                 self.PitValue(self.board[i], board[i], add)
                 time.sleep(0.8)
             self.change[i]=board[i]
-        self.DisplayTurn(2)
         time.sleep(0.5)
 
     def Update2(self, board, player=2):
@@ -254,7 +253,6 @@ class Drawer:
                 self.PitValue(self.board[i], board[i], add)
                 time.sleep(0.8)
             self.change[i]=board[i]
-        self.DisplayTurn(1)
         time.sleep(0.5)
     def DisplayTheWinner(self, player, score):
         self.drawBoard()

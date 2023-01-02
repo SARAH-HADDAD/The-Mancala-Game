@@ -17,9 +17,11 @@ while (not game.gameOver()):
         player = test.humanTurn(game)
         draw.RemovePossibleMoves(game.state.possibleMoves(1))
         draw.Update1(game.state.board)
+        draw.DisplayTurn(player)
     else:
         player, game = test.computerTurn(game, test)
         draw.Update2(game.state.board)
+        draw.DisplayTurn(player)
     # Handle events
     for event in pygame.event.get():
         # Quit the game if the user closes the window
