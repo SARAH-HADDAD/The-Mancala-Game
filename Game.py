@@ -44,3 +44,13 @@ class Game:
 
     def evaluate(self):  # va estimer le gain
         return (self.state.board[1] - self.state.board[2])
+    def evaluate2(self):  # va estimer le gain
+        n1=0
+        n2=0
+        liste1=["A", "B", "C", "D", "E", "F"]
+        liste2=["G", "H", "I", "J", "K", "L"]
+        for i in range(len(liste1)):
+            n1=self.state.board[liste1[i]]+n1
+        for i in range(len(liste2)):
+            n2=self.state.board[liste2[i]]+n2      
+        return ((self.state.board[1]+n1) -(self.state.board[2]+n2))
